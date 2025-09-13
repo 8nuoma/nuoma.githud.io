@@ -1,11 +1,1019 @@
 <!DOCTYPE html>
-<html>
-  <head>
-	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>1145114</title>
-  </head>
-  <body>	
-	<h1>nuoma233</h1>
-	<p>网站创建成功</p>  
-  </body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Lay on 工作室</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        body {
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            position: relative;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            flex: 1;
+        }
+        .logo h1 {
+            font-size: 36px;
+            margin: 0;
+            color: #000;
+        }
+        .logo .subtitle {
+            font-size: 20px;
+            color: #000;
+            margin: 2px 0 0 0;
+            font-weight: normal;
+        }
+        .logo .translation {
+            font-size: 12px;
+            color: #999;
+            margin: 20px 0 0 2px;
+            display: block;
+        }
+        .nav {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .nav a {
+            padding: 8px 15px;
+            text-decoration: none;
+            color: #000;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            background-color: #f9f9f9;
+            font-size: 14px;
+        }
+        .nav a:hover {
+            background-color: #f0f0f0;
+        }
+        .search-container {
+            width: 100%;
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .search-bar {
+            display: flex;
+            width: 500px;
+        }
+        .search-bar input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-right: none;
+            border-radius: 3px 0 0 3px;
+            font-size: 16px;
+        }
+        .search-button {
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+            color: #000;
+            border: 1px solid #eee;
+            border-radius: 0 3px 3px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .main-title {
+            text-align: center;
+            margin: 30px 0;
+            padding: 40px 20px;
+            background-color: #fafafa;
+            border-radius: 3px;
+        }
+        .main-title h2 {
+            font-size: 32px;
+            color: #000;
+            margin: 0;
+        }
+        .intro {
+            text-align: center;
+            margin: 30px 0;
+            padding: 30px;
+            background-color: #fafafa;
+            border-radius: 3px;
+        }
+        .intro h2 {
+            color: #000;
+            margin-top: 0;
+            font-size: 24px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 论坛容器 - 初始隐藏 */
+        .forum-container {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        /* 模态窗口样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 3px;
+            width: 400px;
+        }
+        .modal h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            background-color: #fafafa;
+        }
+        .btn {
+            padding: 10px 15px;
+            background-color: #e0e0e0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #e0e0e0;
+        }
+        .btn-primary:hover {
+            background-color: #d0d0d0;
+        }
+        .close {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+        }
+        .message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 3px;
+            text-align: center;
+            display: none;
+            color: #000;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Michael</h1>
+                <div class="subtitle">Lay on</div>
+                <span class="translation">↑上面这些字怎么翻译？۹( ÒہÓ )۶</span>
+            </div>
+            <div class="nav">
+                <a href="#" id="loginBtn">登录</a>
+                <a href="#" id="registerBtn">注册</a>
+                <a href="#" id="communityBtn">交流社区</a>
+            </div>
+        </header>
+        
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="text" placeholder="搜索...">
+                <button class="search-button">搜索</button>
+            </div>
+        </div>
+
+        <div class="main-title">
+            <h2>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⡾⠿⣶⣦⡀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡟⠁⠀⠀⠀⠙⣿⡄⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⣿⠀⠀⠀⠀⠀⠀⣹⡇⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣿⣧⡀⠀⠀⠀⣠⡿⠃⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⠀⣠⣾⠋⠉⠙⠻⠿⠿⣿⡟⠁⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⠀⣰⡿⠁⠀⠀⠀⠀⠀⢰⣿⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⢰⡿⠁⠀⠀⢀⣀⠀⠀⣼⡇⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀⣿⢇⣤⡀⢀⣾⣿⡆⠀⣿⣧⣴⡶⠂⠀⠀⠀⠀ ⠀⠀⠀⠀⢰⣿⣼⡿⣷⣼⡏⠹⣷⣠⣿⠏⠁⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⢸⣿⣿⠀⠹⣿⢁⣴⡾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠈⢿⣧⣤⣴⡾⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</h2>
+        </div>
+
+        <div class="intro">
+            <h2>关于我们</h2>
+            <p>MichaelLayon工作室成立于2023年，专注于游戏开发与设计，致力于为玩家带来独特而精彩的游戏体验。</p>
+        </div>
+
+        <!-- 论坛容器 -->
+        <div class="forum-container" id="forumContainer">
+            <div class="forum-header">
+                <h2>交流社区</h2>
+                <button class="btn btn-primary" id="createPostBtn">发布新内容</button>
+            </div>
+            
+            <div class="posts-container">
+                <!-- 发布的帖子将在这里显示 -->
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2023 Michael Lay on 工作室. 保留所有权利.</p>
+        </footer>
+	</div>
+<!-- 注册模态窗口 -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeRegister">&times;</span>
+        <h2>MichaelLayon</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="username">账号名称</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">注册</button>
+        </form>
+        <div id="registerMessage" class="message"></div>
+    </div>
+</div>
+
+<!-- 登录模态窗口 -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeLogin">&times;</span>
+        <h2>MichaelLayon</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginUsername">账号名称</label>
+                <input type="text" id="loginUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">密码</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">登录</button>
+        </form>
+        <div id="loginMessage" class="message"></div>
+    </div>
+</div>
+
+<!-- 发布内容模态窗口 -->
+<div id="postModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closePost">&times;</span>
+        <h2>发布新内容</h2>
+        <form id="postForm">
+            <div class="form-group">
+                <label for="postContent">内容</label>
+                <textarea id="postContent" rows="5" placeholder="分享你的想法..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label>添加图片</label>
+                <input type="file" id="postImageUpload" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary">发布</button>
+        </form>
+    </div>
+</div>
+
+<!-- 回复详情页面 -->
+<div id="replyDetailModal" class="modal">
+    <div class="modal-content" style="width: 80%; max-width: 800px; max-height: 80%; overflow-y: auto;">
+        <span class="close" id="closeReplyDetail">&times;</span>
+        <h2>回复详情</h2>
+        <div id="replyDetailContent">
+            <!-- 回复详情内容将在这里显示 -->
+        </div>
+    </div>
+</div>
+
+<style>
+    /* 论坛样式 */
+    .forum-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .post {
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-radius: 3px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .post-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .post-user {
+        font-weight: bold;
+    }
+    
+    .post-time {
+        font-size: 12px;
+        color: #999;
+        margin-left: 10px;
+    }
+    
+    .post-content {
+        margin-bottom: 15px;
+    }
+    
+    .post-image {
+        max-width: 100%;
+        border-radius: 3px;
+        margin-bottom: 15px;
+    }
+    
+    .post-actions {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .post-action {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #666;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    /* B站风格点赞按钮 */
+    .like-btn {
+        color: #999;
+        transition: color 0.2s;
+    }
+    
+    .like-btn.liked {
+        color: #FB7299;
+    }
+    
+    .like-btn:hover {
+        color: #FB7299;
+    }
+    
+    /* B站风格评论按钮 */
+    .review-btn {
+        color: #999;
+        transition: color 0.2s;
+    }
+    
+    .review-btn:hover {
+        color: #23ADE5;
+    }
+    
+    .reviews {
+        margin-top: 15px;
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+    }
+    
+    .review {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f5f5f5;
+        font-size: 14px;
+    }
+    
+    .review:last-child {
+        border-bottom: none;
+    }
+    
+    .review-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    
+    .review-user {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    
+    .review-time {
+        font-size: 12px;
+        color: #999;
+    }
+    
+    .review-content {
+        margin-left: 5px;
+    }
+    
+    .view-all-reviews {
+        color: #23ADE5;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    
+    .review-form {
+        display: flex;
+        margin-top: 10px;
+    }
+    
+    .review-input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #eee;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+    
+    .review-submit-btn {
+        margin-left: 10px;
+        padding: 8px 15px;
+        background-color: #e0e0e0;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #eee;
+        border-radius: 3px;
+        background-color: #fafafa;
+        resize: vertical;
+        font-family: inherit;
+    }
+    
+    .reply-detail-item {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .reply-detail-item:last-child {
+        border-bottom: none;
+    }
+    
+    .no-posts {
+        text-align: center;
+        padding: 30px;
+        color: #999;
+    }
+		</style>
+<script>
+    // 模拟的用户数据库
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    // DOM元素
+    const registerModal = document.getElementById('registerModal');
+    const loginModal = document.getElementById('loginModal');
+    const postModal = document.getElementById('postModal');
+    const replyDetailModal = document.getElementById('replyDetailModal');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginBtn = document.getElementById('loginBtn');
+    const communityBtn = document.getElementById('communityBtn');
+    const closeRegister = document.getElementById('closeRegister');
+    const closeLogin = document.getElementById('closeLogin');
+    const closePost = document.getElementById('closePost');
+    const closeReplyDetail = document.getElementById('closeReplyDetail');
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
+    const postForm = document.getElementById('postForm');
+    const registerMessage = document.getElementById('registerMessage');
+    const loginMessage = document.getElementById('loginMessage');
+    const forumContainer = document.getElementById('forumContainer');
+    const createPostBtn = document.getElementById('createPostBtn');
+    const postsContainer = document.querySelector('.posts-container');
+    const replyDetailContent = document.getElementById('replyDetailContent');
+    
+    // 打开注册模态窗口
+    registerBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        registerModal.style.display = 'flex';
+        registerMessage.style.display = 'none';
+    });
+    
+    // 打开登录模态窗口
+    loginBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginModal.style.display = 'flex';
+        loginMessage.style.display = 'none';
+    });
+    
+    // 打开社区
+    communityBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) {
+            showMessage(loginMessage, '请先登录再访问社区', 'message');
+            loginModal.style.display = 'flex';
+            return;
+        }
+        
+        // 隐藏主页内容，显示社区
+        document.querySelector('.search-container').style.display = 'none';
+        document.querySelector('.main-title').style.display = 'none';
+        document.querySelector('.intro').style.display = 'none';
+        forumContainer.style.display = 'block';
+        
+        // 加载帖子
+        loadPosts();
+    });
+    
+    // 打开发布模态窗口
+    createPostBtn.addEventListener('click', function() {
+        postModal.style.display = 'flex';
+    });
+    
+    // 关闭注册模态窗口
+    closeRegister.addEventListener('click', function() {
+        registerModal.style.display = 'none';
+    });
+    
+    // 关闭登录模态窗口
+    closeLogin.addEventListener('click', function() {
+        loginModal.style.display = 'none';
+    });
+    
+    // 关闭发布模态窗口
+    closePost.addEventListener('click', function() {
+        postModal.style.display = 'none';
+    });
+    
+    // 关闭回复详情模态窗口
+    closeReplyDetail.addEventListener('click', function() {
+        replyDetailModal.style.display = 'none';
+    });
+    
+    // 点击模态窗口外部关闭窗口
+    window.addEventListener('click', function(e) {
+        if (e.target === registerModal) {
+            registerModal.style.display = 'none';
+        }
+        if (e.target === loginModal) {
+            loginModal.style.display = 'none';
+        }
+        if (e.target === postModal) {
+            postModal.style.display = 'none';
+        }
+        if (e.target === replyDetailModal) {
+            replyDetailModal.style.display = 'none';
+        }
+    });
+    
+    // 注册表单提交
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        // 检查用户名是否已存在
+        if (users.some(user => user.username === username)) {
+            showMessage(registerMessage, '用户名已存在', 'message');
+            return;
+        }
+        
+        // 保存用户数据
+        users.push({ username, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        
+        showMessage(registerMessage, '注册成功！', 'message');
+        
+        // 清空表单
+        registerForm.reset();
+        
+        // 3秒后关闭窗口
+        setTimeout(() => {
+            registerModal.style.display = 'none';
+        }, 3000);
+    });
+    
+    // 登录表单提交
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        // 验证用户信息
+        const user = users.find(user => user.username === username && user.password === password);
+        
+        if (user) {
+            showMessage(loginMessage, '登录成功！', 'message');
+            
+            // 保存当前用户登录状态
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            
+            // 3秒后关闭窗口并更新界面
+            setTimeout(() => {
+                loginModal.style.display = 'none';
+                updateUIAfterLogin(user);
+            }, 3000);
+        } else {
+            showMessage(loginMessage, '用户名或密码错误', 'message');
+        }
+    });
+    
+    // 显示消息
+    function showMessage(element, text, type) {
+        element.textContent = text;
+        element.className = type;
+        element.style.display = 'block';
+    }
+// 发布表单提交
+postForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+        showMessage(loginMessage, '请先登录再发布内容', 'message');
+        loginModal.style.display = 'flex';
+        return;
+    }
+    
+    const content = document.getElementById('postContent').value;
+    
+    // 获取图片数据
+    let image = '';
+    const imageFile = document.getElementById('postImageUpload').files[0];
+    if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            image = e.target.result;
+            createPost(content, image);
+        };
+        reader.readAsDataURL(imageFile);
+    } else {
+        createPost(content, '');
+    }
+    
+    // 清空表单
+    postForm.reset();
+    
+    // 关闭模态窗口
+    postModal.style.display = 'none';
+});
+
+// 创建帖子
+function createPost(content, image) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    // 创建新帖子
+    const newPost = {
+        id: Date.now(),
+        username: currentUser.username,
+        content: content,
+        image: image,
+        timestamp: new Date(),
+        likes: 0,
+        likedBy: [],
+        reviews: []
+    };
+    
+    // 保存帖子
+    const posts = JSON.parse(localStorage.getItem('posts')) || [];
+    posts.unshift(newPost);
+    localStorage.setItem('posts', JSON.stringify(posts));
+    
+    // 重新加载帖子
+    loadPosts();
+}
+
+// 加载帖子
+function loadPosts() {
+    const posts = JSON.parse(localStorage.getItem('posts')) || [];
+    postsContainer.innerHTML = '';
+    
+    if (posts.length === 0) {
+        postsContainer.innerHTML = '<p class="no-posts">还没有帖子，成为第一个发帖的人吧！</p>';
+        return;
+    }
+    
+    posts.forEach(post => {
+        const postElement = createPostElement(post);
+        postsContainer.appendChild(postElement);
+    });
+}
+
+// 创建帖子元素
+function createPostElement(post) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const postElement = document.createElement('div');
+    postElement.className = 'post';
+    postElement.dataset.id = post.id;
+    
+    // 格式化时间
+    const postTime = formatDate(post.timestamp);
+    
+    // 检查当前用户是否已点赞
+    const isLiked = currentUser && post.likedBy.includes(currentUser.username);
+    
+    // 只显示前2条回复
+    const displayedReviews = post.reviews.slice(0, 2);
+    
+    postElement.innerHTML = `
+        <div class="post-header">
+            <div class="post-user">${post.username}</div>
+            <div class="post-time">${postTime}</div>
+        </div>
+        <div class="post-content">${post.content}</div>
+        ${post.image ? `<img src="${post.image}" class="post-image" alt="帖子图片">` : ''}
+        <div class="post-actions">
+            <div class="post-action like-btn ${isLiked ? 'liked' : ''}" data-id="${post.id}">
+                <i class="fas fa-thumbs-up"></i> <span class="like-count">${post.likes}</span>
+            </div>
+            <div class="post-action review-btn" data-id="${post.id}">
+                <i class="fas fa-comment"></i> <span class="review-count">${post.reviews.length}</span>
+            </div>
+        </div>
+        <div class="reviews">
+            ${displayedReviews.map(review => `
+                <div class="review">
+                    <div class="review-header">
+                        <div class="review-user">${review.username}</div>
+                        <div class="review-time">${formatDate(review.timestamp)}</div>
+                    </div>
+                    <div class="review-content">${review.content}</div>
+                </div>
+            `).join('')}
+            ${post.reviews.length > 2 ? `
+                <div class="view-all-reviews" data-id="${post.id}">
+                    查看全部 ${post.reviews.length} 条回复
+                </div>
+            ` : ''}
+            <div class="review-form">
+                <input type="text" class="review-input" placeholder="写下你的回复..." data-id="${post.id}">
+                <button class="review-submit-btn" data-id="${post.id}">发送</button>
+            </div>
+        </div>
+    `;
+    
+    // 添加点赞事件监听
+    const likeBtn = postElement.querySelector('.like-btn');
+    likeBtn.addEventListener('click', function() {
+        if (!currentUser) {
+            showMessage(loginMessage, '请先登录再点赞', 'message');
+            loginModal.style.display = 'flex';
+            return;
+        }
+        
+        const postId = this.dataset.id;
+        likePost(postId);
+    });
+    
+    // 添加查看全部回复事件监听
+    const viewAllBtn = postElement.querySelector('.view-all-reviews');
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', function() {
+            const postId = this.dataset.id;
+            showAllReviews(postId);
+        });
+    }
+    
+    // 添加回复事件监听
+    const reviewSubmitBtn = postElement.querySelector('.review-submit-btn');
+    const reviewInput = postElement.querySelector('.review-input');
+    
+    reviewSubmitBtn.addEventListener('click', function() {
+        if (!currentUser) {
+            showMessage(loginMessage, '请先登录再回复', 'message');
+            loginModal.style.display = 'flex';
+            return;
+        }
+        
+        const postId = this.dataset.id;
+        const content = reviewInput.value.trim();
+        
+        if (content) {
+            addReview(postId, content);
+            reviewInput.value = '';
+        }
+    });
+    
+    return postElement;
+}
+
+// 格式化日期
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 ${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+}
+    // 点赞帖子
+    function likePost(postId) {
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        const postIndex = posts.findIndex(post => post.id == postId);
+        if (postIndex === -1) return;
+        
+        const post = posts[postIndex];
+        const userIndex = post.likedBy.indexOf(currentUser.username);
+        
+        if (userIndex === -1) {
+            // 用户尚未点赞，添加点赞
+            post.likes++;
+            post.likedBy.push(currentUser.username);
+        } else {
+            // 用户已点赞，取消点赞
+            post.likes--;
+            post.likedBy.splice(userIndex, 1);
+        }
+        
+        // 更新本地存储
+        localStorage.setItem('posts', JSON.stringify(posts));
+        
+        // 更新UI
+        loadPosts();
+    }
+    
+    // 添加回复
+    function addReview(postId, content) {
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        const postIndex = posts.findIndex(post => post.id == postId);
+        if (postIndex === -1) return;
+        
+        // 添加新回复
+        posts[postIndex].reviews.push({
+            username: currentUser.username,
+            content: content,
+            timestamp: new Date()
+        });
+        
+        // 更新本地存储
+        localStorage.setItem('posts', JSON.stringify(posts));
+        
+        // 更新UI
+        loadPosts();
+    }
+    
+    // 显示所有回复
+    function showAllReviews(postId) {
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        const post = posts.find(p => p.id == postId);
+        
+        if (!post) return;
+        
+        replyDetailContent.innerHTML = `
+            <div class="reply-detail-item">
+                <div class="post-header">
+                    <div class="post-user">${post.username}</div>
+                    <div class="post-time">${formatDate(post.timestamp)}</div>
+                </div>
+                <div class="post-content">${post.content}</div>
+                ${post.image ? `<img src="${post.image}" class="post-image" alt="帖子图片">` : ''}
+                <div class="post-actions">
+                    <div class="post-action like-btn ${post.likedBy.includes(post.username) ? 'liked' : ''}">
+                        <i class="fas fa-thumbs-up"></i> <span class="like-count">${post.likes}</span>
+                    </div>
+                    <div class="post-action review-btn">
+                        <i class="fas fa-comment"></i> <span class="review-count">${post.reviews.length}</span>
+                    </div>
+                </div>
+            </div>
+            <h3>全部回复 (${post.reviews.length})</h3>
+            ${post.reviews.map(review => `
+                <div class="reply-detail-item">
+                    <div class="review-header">
+                        <div class="review-user">${review.username}</div>
+                        <div class="review-time">${formatDate(review.timestamp)}</div>
+                    </div>
+                    <div class="review-content">${review.content}</div>
+                </div>
+            `).join('')}
+            <div class="review-form" style="margin-top: 20px;">
+                <input type="text" class="review-input" placeholder="写下你的回复..." data-id="${post.id}" id="detail-review-input">
+                <button class="review-submit-btn" data-id="${post.id}" id="detail-review-submit">发送</button>
+            </div>
+        `;
+        
+        // 添加详情页回复事件监听
+        const detailReviewSubmit = document.getElementById('detail-review-submit');
+        const detailReviewInput = document.getElementById('detail-review-input');
+        
+        detailReviewSubmit.addEventListener('click', function() {
+            if (!currentUser) {
+                showMessage(loginMessage, '请先登录再回复', 'message');
+                loginModal.style.display = 'flex';
+                return;
+            }
+            
+            const postId = this.dataset.id;
+            const content = detailReviewInput.value.trim();
+            
+            if (content) {
+                addReview(postId, content);
+                detailReviewInput.value = '';
+                
+                // 重新加载详情
+                setTimeout(() => {
+                    showAllReviews(postId);
+                }, 100);
+            }
+        });
+        
+        replyDetailModal.style.display = 'flex';
+    }
+    
+    // 登录后更新UI
+    function updateUIAfterLogin(user) {
+        // 更改导航栏显示
+        const nav = document.querySelector('.nav');
+        nav.innerHTML = `
+            <span>欢迎, ${user.username}</span>
+            <a href="#" id="logoutBtn">退出</a>
+            <a href="#" id="communityBtn">交流社区</a>
+        `;
+        
+        // 重新添加社区按钮事件
+        document.getElementById('communityBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.search-container').style.display = 'none';
+            document.querySelector('.main-title').style.display = 'none';
+            document.querySelector('.intro').style.display = 'none';
+            forumContainer.style.display = 'block';
+            loadPosts();
+        });
+        
+        // 添加退出功能
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('currentUser');
+            location.reload();
+        });
+    }
+    
+    // 页面加载时检查登录状态
+    window.addEventListener('DOMContentLoaded', function() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            updateUIAfterLogin(currentUser);
+        }
+    });
+    
+    // 搜索功能
+    document.querySelector('.search-button').addEventListener('click', function() {
+        const searchTerm = document.querySelector('input[type="text"]').value;
+        if (searchTerm.trim() !== '') {
+            alert('执行搜索: ' + searchTerm);
+        }
+    });
+    
+    // 支持按回车键搜索
+    document.querySelector('input[type="text"]').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.querySelector('.search-button').click();
+        }
+    });
+</script>
+</body>
 </html>
+
+
+
